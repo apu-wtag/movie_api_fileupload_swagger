@@ -16,16 +16,16 @@ module V1
           examples: {
             'application/json': {
               value: [
-                { id: 1, name: "Christopher Nolan", date_of_birth: "1970-07-30", movies: [{ id: 1, title: "Inception", genre: "Sci-Fi", release_date: "2010-07-16" }] },
-                { id: 2, name: "Denis Villeneuve", date_of_birth: "1967-10-03", movies: [{ id: 3, title: "Dune", genre: "Sci-Fi", release_date: "2021-10-22" }] }
+                { id: 1, name: "Christopher Nolan", date_of_birth: "1970-07-30", movies: [ { id: 1, title: "Inception", genre: "Sci-Fi", release_date: "2010-07-16" } ] },
+                { id: 2, name: "Denis Villeneuve", date_of_birth: "1967-10-03", movies: [ { id: 3, title: "Dune", genre: "Sci-Fi", release_date: "2021-10-22" } ] }
               ]
               # summary: 'Example Directors List'
             }
           }
         },
         is_array: true,
-        produces: ["application/json"],
-        tags: ["directors"]
+        produces: [ "application/json" ],
+        tags: [ "directors" ]
       }
       get do
         directors = Director.includes(:movies).all
@@ -39,8 +39,8 @@ module V1
           { code: 400, message: "Bad Request / Validation error" },
           { code: 422, message: "Unprocessable Entity" }
         ],
-        produces: ["application/json"],
-        tags: ["directors"]
+        produces: [ "application/json" ],
+        tags: [ "directors" ]
       }
       params do
         use :director_attributes
@@ -59,14 +59,14 @@ module V1
             model: V1::Entities::DirectorEntity,
             examples: {
               'application/json': {
-                value: { id: 1, name: "Christopher Nolan", date_of_birth: "1970-07-30", movies: [{ id: 1, title: "Inception", genre: "Sci-Fi", release_date: "2010-07-16" }, { id: 2, title: "The Dark Knight", genre: "Action", release_date: "2008-07-18" }] },
+                value: { id: 1, name: "Christopher Nolan", date_of_birth: "1970-07-30", movies: [ { id: 1, title: "Inception", genre: "Sci-Fi", release_date: "2010-07-16" }, { id: 2, title: "The Dark Knight", genre: "Action", release_date: "2008-07-18" } ] },
                 summary: "Example Director Response"
               }
             }
           },
-          failure: [{ code: 404, message: "Director not found" }],
-          produces: ["application/json"],
-          tags: ["directors"]
+          failure: [ { code: 404, message: "Director not found" } ],
+          produces: [ "application/json" ],
+          tags: [ "directors" ]
         }
         get do
           present director, with: V1::Entities::DirectorEntity
@@ -79,8 +79,8 @@ module V1
             { code: 400, message: "Bad Request / Validation error" },
             { code: 404, message: "Director not found" }
           ],
-          produces: ["application/json"],
-          tags: ["directors"]
+          produces: [ "application/json" ],
+          tags: [ "directors" ]
         }
         params do
           use  :director_attributes
@@ -98,8 +98,8 @@ module V1
             { code: 400, message: "Bad Request / Validation error" },
             { code: 404, message: "Director not found" }
           ],
-          produces: ["application/json"],
-          tags: ["directors"]
+          produces: [ "application/json" ],
+          tags: [ "directors" ]
         }
         delete do
           director.destroy!

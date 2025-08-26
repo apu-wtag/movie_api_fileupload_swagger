@@ -24,8 +24,8 @@ module V1
           }
         },
         is_array: true,
-        produces: ["application/json"],
-        tags: ["movies"]
+        produces: [ "application/json" ],
+        tags: [ "movies" ]
       }
       params do
         use :pagination, per_page: 2, max_per_page: 5
@@ -42,9 +42,9 @@ module V1
           { code: 400, message: "Bad Request / Validation error" },
           { code: 422, message: "Unprocessable Entity" }
         ],
-        consumes: ["multipart/form-data"],
-        produces: ["application/json"],
-        tags: ["movies"]
+        consumes: [ "multipart/form-data" ],
+        produces: [ "application/json" ],
+        tags: [ "movies" ]
       }
       params do
         use :movie_attributes
@@ -56,7 +56,7 @@ module V1
         movie = Movie.create!(movie_params)
         if poster_file
           movie.poster.attach(
-            io: poster_file[:tempfile], filename: poster_file[:filename],content_type: poster_file[:type]
+            io: poster_file[:tempfile], filename: poster_file[:filename], content_type: poster_file[:type]
           )
         end
         present movie, with: V1::Entities::MovieDetailEntity
@@ -77,17 +77,17 @@ module V1
                   release_date: "2010-07-16",
                   description: "A thief who steals corporate secrets through the use of dream-sharing technology...",
                   director: { id: 1, name: "Christopher Nolan", date_of_birth: "1970-07-30" },
-                  actors: [{ id: 1, name: "Leonardo DiCaprio", date_of_birth: "1974-11-11" }],
-                  reviews: [{ id: 1, rating: 5, comment: "Mind-bendingly brilliant!" }],
+                  actors: [ { id: 1, name: "Leonardo DiCaprio", date_of_birth: "1974-11-11" } ],
+                  reviews: [ { id: 1, rating: 5, comment: "Mind-bendingly brilliant!" } ],
                   poster_url: "http://localhost:3000/rails/active_storage/blobs/redirect/..."
                 },
                 summary: "Example Detailed Response"
               }
             }
           },
-          failure: [{ code: 404, message: "Movie not found" }],
-          produces: ["application/json"],
-          tags: ["movies"]
+          failure: [ { code: 404, message: "Movie not found" } ],
+          produces: [ "application/json" ],
+          tags: [ "movies" ]
         }
         get do
           present movie, with: V1::Entities::MovieDetailEntity
@@ -100,9 +100,9 @@ module V1
             { code: 400, message: "Bad Request / Validation error" },
             { code: 404, message: "Movie not found" }
           ],
-          consumes: ["application/json", "multipart/form-data"],
-          produces: ["application/json"],
-          tags: ["movies"]
+          consumes: %w[application/json multipart/form-data],
+          produces: [ "application/json" ],
+          tags: [ "movies" ]
         }
         params do
           use :movie_attributes
@@ -113,7 +113,7 @@ module V1
           movie.update!(update_params)
           if poster_file
             movie.poster.attach(
-              io: poster_file[:tempfile], filename: poster_file[:filename],content_type: poster_file[:type]
+              io: poster_file[:tempfile], filename: poster_file[:filename], content_type: poster_file[:type]
             )
           end
           present movie, with: V1::Entities::MovieDetailEntity
@@ -121,15 +121,15 @@ module V1
         desc "Delete an existing movie.", {
           summary: "Delete a movie",
           detail: "Permanently deletes a movie and its associated reviews and castings.",
-          failure: [{ code: 404, message: "Movie not found" }],
+          failure: [ { code: 404, message: "Movie not found" } ],
           success_code: 204,
-          tags: ["movies"]
+          tags: [ "movies" ]
         }
         delete do
           movie.destroy!
           status 204
         end
-        #reviews resource
+        # reviews resource
         resource :reviews do
           desc "Return all reviews for a specific movie.", {
             summary: "Get movie reviews",
@@ -146,10 +146,10 @@ module V1
                 }
               }
             },
-            failure: [{ code: 404, message: "Movie not found" }],
+            failure: [ { code: 404, message: "Movie not found" } ],
             is_array: true,
-            produces: ["application/json"],
-            tags: ["reviews"]
+            produces: [ "application/json" ],
+            tags: [ "reviews" ]
           }
           get do
             present movie.reviews, with: V1::Entities::ReviewEntity
@@ -169,14 +169,14 @@ module V1
                 }
               }
             },
-            failure: [{ code: 404, message: "Movie not found" }],
+            failure: [ { code: 404, message: "Movie not found" } ],
             is_array: true,
-            produces: ["application/json"],
-            tags: ["reviews"]
+            produces: [ "application/json" ],
+            tags: [ "reviews" ]
           }
           params do
-            requires :rating, type: Integer, values: 1..5, documentation: { type: 'integer', desc: 'Rating (1-5)', example: 5 }
-            requires :comment, type: String, documentation: { type: 'string', desc: 'The review comment', example: 'Absolutely fantastic!' }
+            requires :rating, type: Integer, values: 1..5, documentation: { type: "integer", desc: "Rating (1-5)", example: 5 }
+            requires :comment, type: String, documentation: { type: "string", desc: "The review comment", example: "Absolutely fantastic!" }
           end
 
           post do
