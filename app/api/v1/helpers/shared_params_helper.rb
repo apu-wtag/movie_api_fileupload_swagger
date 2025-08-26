@@ -8,7 +8,7 @@ module V1
         optional :release_date, type: Date, desc: "Release date"
         optional :genre, type: String, desc: "Genre of the movie"
         optional :director_id, type: Integer, desc: "ID of the director"
-        optional :poster, type: File , desc: "Poster of the movie (Image File)"
+        optional :poster, type: File, desc: "Poster of the movie (Image File)"
       end
       params :director_attributes do
         optional :name, type: String, desc: "Name of the director"
