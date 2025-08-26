@@ -1,4 +1,4 @@
-require_relative 'movie_entity'
+require_relative "movie_entity"
 module V1
   module Entities
     class DirectorEntity < Grape::Entity
