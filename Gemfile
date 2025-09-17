@@ -52,7 +52,7 @@ gem "grape-entity", "~> 1.0"
 
 gem "grape-swagger", "~> 2.1"
 
-gem "grape-swagger-rails", "~> 0.6.0"
+gem "grape-swagger-rails", "~> 0.7.0"
 
 # gem "sprockets-rails", "~> 3.5"
 
